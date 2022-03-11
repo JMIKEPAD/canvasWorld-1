@@ -30,6 +30,8 @@ class World {
             return new RectSprite(side * column, side * row, side, side, 0, 0, "tomato");
           case 2:
             return new RectSprite(side * column, side * row, side, side, 0, 0, "blue");
+          case 4:
+            return new ExitSprite (side * column, side * row, side, side, 0, 0);
           default:
             return new PlayerSprite(side * column, side * row, side, side, 0, 0);
       }

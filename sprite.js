@@ -55,25 +55,80 @@ class CircleSprite {
   }
 }
 
+
+
+/////////////////////////////////////////////////////////////// PLAYER ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 class PlayerSprite extends RectSprite {
+
   constructor(x, y, width, height, speedX, speedY) {
     super(x, y, width, height, speedX, speedY, "magenta");
     this.isPlayer = true;
+    this.isActive = true;
+    this.isSolid = true;
+    this.isJumping = false;
   }
+
 
   update(canvas, controller) {
     if (controller.isUpClicked) {
-      this.speedY += -0.1;
+      if (this.isJumping === false) {
+        this.speedY += -10;                        //AUMENTO DA 0.1 A 0.4 PER AVERE UNA FORZA MAGGIORE DELLA GRAVITA'
+        this.isJumping = true;
+      }
     }
-    if (controller.isDownClicked) {
-      this.speedY += 0.1;
-    }
+    // if (controller.isDownClicked) {             //COMMENTO PER AVERE UN PLAYER CHE RIESCE A MUOVERSI CON LA GRAVITA'
+    //   this.speedY += 0.1;
+    // }
     if (controller.isRightClicked) {
-      this.speedX += 0.1;
+      this.speedX += 0.2;
     }
     if (controller.isLeftClicked) {
-      this.speedX += -0.1;
+      this.speedX += -0.2;
     }
+
+    //AGGIUNGO LA FRICTION DALLA CLASSE PHYSIC:
+    const friction = Physic.getFriction();
+    this.speedX *= friction;                       //fare la friction *= 0.1 è come fare /=10 --> *=0.5 e come fare /=2
+    this.speedY *= friction;
+
+    //AGGIUNGO LA GRAVITA' DELLA CLASSE PHYSIC:
+    const gravity = Physic.getGravity();
+    this.speedX += gravity.x;
+    this.speedY += gravity.y;
+
     super.update(canvas);
   }
+
+  manageCollision(sprite, isHorizontal){
+    if (isHorizontal) {
+      this.isJumping = false;
+    }
+    
+  }
 }
+
+
+
+class ExitSprite extends RectSprite{
+
+  constructor(x, y, width, height, speedX, speedY) {
+    super(x, y, width, height, speedX, speedY, "green");
+    this.isExit = true;
+  }
+
+}
+
+
+
+
+
+
+
+
+///////////////////////////////////// VELOCITA' - ACCELERAZIONE - GRAVITA' ///////////////////////////////////////////////////////////////////////////////////////
+/*
+V = a * t = m/s^2 * s = m/s
+F = m * a
+*/
