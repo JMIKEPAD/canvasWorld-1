@@ -32,6 +32,10 @@ class World {
             return new RectSprite(side * column, side * row, side, side, 0, 0, "blue");
           case 4:
             return new ExitSprite (side * column, side * row, side, side, 0, 0);
+          case 5:
+            return new Enemy (side * column, side * row, side, side, true);
+          case 6:
+            return new Enemy (side * column, side * row, side, side, false);
           default:
             return new PlayerSprite(side * column, side * row, side, side, 0, 0);
       }

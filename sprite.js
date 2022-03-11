@@ -10,6 +10,7 @@ class RectSprite {
   }
 
   update(canvas) {
+
     this.x = this.x + this.speedX;
     this.y = this.y + this.speedY;
     if (this.x > canvas.width - this.width || this.x < 0) {
@@ -21,8 +22,11 @@ class RectSprite {
   }
 
   draw(context) {
+    //let img = document.createElement("img");
+    //img.src = "./jungle-tileset.png";
     context.fillStyle = this.color;
     context.fillRect(this.x, this.y, this.width, this.height);
+    //context.drawImage(img, 1, 1);
   }
 }
 
@@ -69,6 +73,7 @@ class PlayerSprite extends RectSprite {
     this.isSolid = true;
     this.isJumping = false;
     this.win = false;
+    this.isDead = false;
   }
 
 
@@ -106,10 +111,12 @@ class PlayerSprite extends RectSprite {
     if (sprite.isExit) {
       this.win = true;
     }
+    if (sprite.isEnemy) {
+      this.isDead = true;
+    }
     if (isHorizontal) {
       this.isJumping = false;
     }
-    
   }
 }
 
@@ -125,6 +132,32 @@ class ExitSprite extends RectSprite{
 }
 
 
+
+class Enemy extends RectSprite {
+  constructor(x, y, width, height, isVertical) {
+    let speedX;
+    let speedY;
+    let color;
+    if (isVertical) {
+      speedX = 0;
+      speedY = 1;
+      color = "yellow";
+    } else {
+      speedX = 1;
+      speedY = 0;
+      color = "blue";
+    }
+    super(x, y, width, height, speedX, speedY, color);
+    this.isActive = true;
+    this.isEnemy = true;
+  }
+
+  manageCollision(sprite) {
+    console.log('collision');
+    this.speedX *= -1;
+    this.speedY *= -1;
+  }
+}
 
 
 

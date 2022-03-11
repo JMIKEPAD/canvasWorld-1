@@ -36,12 +36,8 @@ class CollisionDetector {
  * @returns a boolean value.
  */
   static isColliding(activeSprite, wall) {
-    const collidingX =
-      activeSprite.x <= wall.x + wall.width &&
-      activeSprite.x + activeSprite.width >= wall.x;
-    const collidingY =
-      activeSprite.y <= wall.y + wall.height &&
-      activeSprite.y + activeSprite.height >= wall.y;
+    const collidingX = activeSprite.x < wall.x + wall.width && activeSprite.x + activeSprite.width > wall.x;
+    const collidingY = activeSprite.y < wall.y + wall.height && activeSprite.y + activeSprite.height > wall.y;
     return collidingX && collidingY;
   }
 
