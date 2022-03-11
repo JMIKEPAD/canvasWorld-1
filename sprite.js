@@ -68,6 +68,7 @@ class PlayerSprite extends RectSprite {
     this.isActive = true;
     this.isSolid = true;
     this.isJumping = false;
+    this.win = false;
   }
 
 
@@ -102,6 +103,9 @@ class PlayerSprite extends RectSprite {
   }
 
   manageCollision(sprite, isHorizontal){
+    if (sprite.isExit) {
+      this.win = true;
+    }
     if (isHorizontal) {
       this.isJumping = false;
     }

@@ -72,7 +72,7 @@ class CollisionDetector {
       }
       activeSprite.speedX = 0;
       if (entity.color === "green") {
-          document.location.reload(true);
+        //   document.location.reload(true);
       } else {
         return false; }                                                    //ritrono un boolean per avere le collisioni orizzontali o verticali --> queste verticali 
 
