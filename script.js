@@ -18,12 +18,13 @@ setInterval(() => {
 
     if (sprite.win) {
       level ++;
-      
+      console.log(level);
       sprites = World.build(Levels.getLevel(level));
 
     }
     if (sprite.isDead) {
       level = 2;
+      console.log(level);
       sprites = World.build(Levels.getLevel(level));
     }
     CollisionDetector.checkCollisions(sprite, sprites);
