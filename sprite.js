@@ -153,7 +153,6 @@ class Enemy extends RectSprite {
   }
 
   manageCollision(sprite) {
-    console.log('collision');
     this.speedX *= -1;
     this.speedY *= -1;
   }

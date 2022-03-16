@@ -13,11 +13,12 @@ const controller = new Controller();
 setInterval(() => {
 
   context.clearRect(0, 0, canvas.width, canvas.height);
-  let level = 2;
+  let level = 3;
   for (const sprite of sprites) {
 
     if (sprite.win) {
       level ++;
+      
       sprites = World.build(Levels.getLevel(level));
 
     }
